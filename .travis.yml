@@ -1,0 +1,11 @@
+sudo: required
+language: generic
+services:
+  - docker
+before_install:
+  - echo "start Creating an image with dockerfile"
+  - docker build -t heoaa/reactapp -f Dockerfile.dev .
+script:
+  - docker run -e CI=true heoaa/reactapp npm run test -- --coverage
+after_success:
+  - echo "Test Success"
